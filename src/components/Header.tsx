@@ -124,15 +124,15 @@ export const Header: React.FC<HeaderProps> = ({ onSelectCategory, onOpenSearch }
           </div>
 
           {/* Mobile Right Action Bar: Call + Search + Quote + Hamburger (All in ONE sleek bar) */}
-          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
+          <div className="flex lg:hidden items-center gap-1 sm:gap-1.5">
             {/* Call Showroom */}
             <a
               href="tel:+8801911776657"
-              className="w-8.5 h-8.5 rounded-full bg-white border border-[#E2DFD8] text-[#9E783B] flex items-center justify-center hover:bg-[#C5994E] hover:text-[#1F2124] transition-colors shadow-2xs active:scale-95"
+              className="w-8 h-8 rounded-full text-[#9E783B] hover:text-[#7A5B28] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
               title="Call Showroom Hotline"
               aria-label="Call Showroom"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Phone className="w-4 h-4" />
             </a>
 
             {/* Search */}
@@ -144,11 +144,11 @@ export const Header: React.FC<HeaderProps> = ({ onSelectCategory, onOpenSearch }
                   router.push('/products');
                 }
               }}
-              className="w-8.5 h-8.5 rounded-full bg-white border border-[#E2DFD8] text-slate-700 flex items-center justify-center hover:border-[#9E783B] transition-colors shadow-2xs active:scale-95"
+              className="w-8 h-8 rounded-full text-[#1F2124] hover:text-[#9E783B] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
               title="Search Tiles"
               aria-label="Search Tiles"
             >
-              <Search className="w-3.5 h-3.5" />
+              <Search className="w-4 h-4" />
             </button>
 
             {/* Quote Button with Badge */}
@@ -170,10 +170,10 @@ export const Header: React.FC<HeaderProps> = ({ onSelectCategory, onOpenSearch }
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-8.5 h-8.5 rounded-lg bg-[#1F2124] text-white flex items-center justify-center shadow-2xs active:scale-95"
+              className="w-8 h-8 rounded-lg text-[#1F2124] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
