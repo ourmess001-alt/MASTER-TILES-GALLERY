@@ -128,7 +128,7 @@ export const TileDetailOverlay: React.FC<TileDetailOverlayProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="fixed inset-0 z-50 overflow-hidden flex items-end sm:items-center justify-center sm:p-4 sm:py-6">
           {/* Backdrop blur */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -139,36 +139,35 @@ export const TileDetailOverlay: React.FC<TileDetailOverlayProps> = ({
             className="fixed inset-0 bg-slate-950/70 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
-          <div className="min-h-screen px-0 sm:px-4 py-0 sm:py-6 flex items-end sm:items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-              className="relative w-full max-w-4xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden border border-[#E5E2DA] z-10 my-0 sm:my-auto max-h-[92vh] sm:max-h-[90vh] flex flex-col"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Sticky Top Header Bar */}
-              <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 sm:px-6 py-3 border-b border-[#EAE7E0] flex items-center justify-between">
-                <div className="flex items-center gap-2 min-w-0 pr-3">
-                  <span className="px-2 py-0.5 rounded bg-[#FAF6EE] text-[#9E783B] border border-[#E8DEC8] text-[10px] sm:text-xs font-mono font-bold flex-shrink-0">
-                    {tile.code}
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-slate-800 truncate">
-                    {cleanTitle}
-                  </span>
-                </div>
-
-                {/* Close Button */}
-                <button
-                  onClick={onClose}
-                  aria-label="Close details"
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F4F2EC] hover:bg-slate-200 text-slate-700 flex items-center justify-center shadow-xs transition-colors flex-shrink-0 active:scale-90"
-                >
-                  <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </button>
+          {/* Modal Container - Full screen on mobile (no top gap), elegant floating modal on desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{ type: 'spring', stiffness: 360, damping: 32 }}
+            className="relative w-full max-w-4xl bg-white sm:rounded-3xl shadow-2xl overflow-hidden sm:border border-[#E5E2DA] z-10 h-full sm:h-auto sm:max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Sticky Top Header Bar */}
+            <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 sm:px-6 py-3 border-b border-[#EAE7E0] flex items-center justify-between">
+              <div className="flex items-center gap-2 min-w-0 pr-3">
+                <span className="px-2 py-0.5 rounded bg-[#FAF6EE] text-[#9E783B] border border-[#E8DEC8] text-[10px] sm:text-xs font-mono font-bold flex-shrink-0">
+                  {tile.code}
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-slate-800 truncate">
+                  {cleanTitle}
+                </span>
               </div>
+
+              {/* Close Button */}
+              <button
+                onClick={onClose}
+                aria-label="Close details"
+                className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-full bg-[#F4F2EC] hover:bg-slate-200 text-slate-700 flex items-center justify-center shadow-xs transition-colors flex-shrink-0 active:scale-90"
+              >
+                <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </button>
+            </div>
 
               {/* Scrollable Content Grid */}
               <div className="overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[#EAE7E0]">
@@ -405,7 +404,7 @@ export const TileDetailOverlay: React.FC<TileDetailOverlayProps> = ({
                   </div>
 
                   {/* Action Buttons: Luxury Obsidian Charcoal CTA + Authentic WhatsApp Green */}
-                  <div className="space-y-2.5 pt-1.5">
+                  <div className="space-y-2.5 pt-1.5 pb-8 sm:pb-0">
                     {/* Primary Action: Add to Quote Bag */}
                     <button
                       type="button"
@@ -500,8 +499,7 @@ export const TileDetailOverlay: React.FC<TileDetailOverlayProps> = ({
               </div>
             </motion.div>
           </div>
-        </div>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
   );
 };
