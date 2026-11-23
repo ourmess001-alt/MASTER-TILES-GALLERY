@@ -59,30 +59,32 @@ export const PopularTilesSection: React.FC<PopularTilesSectionProps> = ({
     <section id="featured" className="py-12 sm:py-16 bg-white border-t border-[#EAE7E1]">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 mb-8">
-          <div>
+        <div className="flex items-end justify-between gap-3 mb-6 sm:mb-8">
+          <div className="min-w-0">
             {/* Overline with Line */}
-            <div className="flex items-center gap-2.5 mb-1.5">
-              <span className="w-8 h-[2px] bg-gradient-to-r from-[#9AA2B0] via-[#666C7A] to-[#3B404B] rounded-full" />
-              <span className="text-[11px] uppercase tracking-widest font-bold text-[#5A606D]">
+            <div className="flex items-center gap-2 mb-1 sm:mb-1.5">
+              <span className="w-6 sm:w-8 h-[2px] bg-gradient-to-r from-[#9AA2B0] via-[#666C7A] to-[#3B404B] rounded-full" />
+              <span className="text-[10.5px] sm:text-[11px] uppercase tracking-widest font-bold text-[#5A606D]">
                 FEATURED PRODUCTS
               </span>
             </div>
 
             {/* Luxury Serif Title */}
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] font-bold tracking-tight">
-              <span className="heading-brand-gradient">Popular Tile </span>
+            <h2 className="font-serif text-2xl sm:text-4xl lg:text-[40px] font-bold tracking-tight leading-tight">
+              <span className="heading-brand-gradient">Popular Tile</span>{' '}
               <span className="heading-brand-accent">Designs</span>
             </h2>
           </div>
 
-          {/* Right Link */}
+          {/* Right Button */}
           <Link
             href="/products"
-            className="group flex items-center gap-1.5 text-xs font-semibold text-[#5A606D] hover:text-[#1F2228] transition-colors"
+            className="group flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#D5D0C7] hover:border-[#1F2124] bg-white hover:bg-[#FAF9F5] text-[11.5px] sm:text-xs md:text-sm font-semibold text-[#1F2124] transition-all shadow-2xs hover:shadow-xs flex-shrink-0 self-end active:scale-95"
+            title="View All Products"
           >
-            <span>View All Products</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            <span>View All</span>
+            <span className="hidden min-[420px]:inline">Products</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#9E783B] transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
