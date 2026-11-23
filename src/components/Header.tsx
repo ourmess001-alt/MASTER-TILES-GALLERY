@@ -123,18 +123,8 @@ export const Header: React.FC<HeaderProps> = ({ onSelectCategory, onOpenSearch }
             </div>
           </div>
 
-          {/* Mobile Right Action Bar: Call + Search + Quote + Hamburger (All in ONE sleek bar) */}
-          <div className="flex lg:hidden items-center gap-1 sm:gap-1.5">
-            {/* Call Showroom */}
-            <a
-              href="tel:+8801911776657"
-              className="w-8 h-8 rounded-full text-[#9E783B] hover:text-[#7A5B28] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
-              title="Call Showroom Hotline"
-              aria-label="Call Showroom"
-            >
-              <Phone className="w-4 h-4" />
-            </a>
-
+          {/* Mobile Right Action Bar: Search + Quote + Hamburger */}
+          <div className="flex lg:hidden items-center gap-2">
             {/* Search */}
             <button
               onClick={() => {
@@ -144,24 +134,23 @@ export const Header: React.FC<HeaderProps> = ({ onSelectCategory, onOpenSearch }
                   router.push('/products');
                 }
               }}
-              className="w-8 h-8 rounded-full text-[#1F2124] hover:text-[#9E783B] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
+              className="w-9 h-9 rounded-full text-[#1F2124] hover:text-[#9E783B] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
               title="Search Tiles"
               aria-label="Search Tiles"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4.5 h-4.5" />
             </button>
 
-            {/* Quote Button with Badge */}
+            {/* Quote Bag Button with Count Badge (Icon + Badge only, no text) */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="relative px-3 py-1.5 rounded-full bg-gradient-to-r from-[#C5994E] to-[#B58940] hover:brightness-105 text-[#18191B] text-xs font-serif font-bold tracking-wide flex items-center gap-1.5 shadow-2xs transition-all active:scale-95"
-              title="View Quote"
-              aria-label="View Quote"
+              className="relative w-9 h-9 rounded-full bg-gradient-to-r from-[#C5994E] to-[#B58940] hover:brightness-105 text-[#18191B] flex items-center justify-center shadow-2xs transition-all active:scale-95"
+              title="View Quote Bag"
+              aria-label="View Quote Bag"
             >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span className="text-[11.5px] font-serif font-bold tracking-wide">Quote</span>
+              <ShoppingBag className="w-4.5 h-4.5" />
               {itemCount > 0 && (
-                <span className="w-4 h-4 rounded-full bg-[#1F2124] text-white text-[9.5px] font-mono font-bold flex items-center justify-center -mr-0.5">
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[#1F2124] text-white text-[9.5px] font-mono font-bold flex items-center justify-center border-2 border-[#FAF9F5] shadow-xs">
                   {itemCount}
                 </span>
               )}
@@ -170,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectCategory, onOpenSearch }
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-8 h-8 rounded-lg text-[#1F2124] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
+              className="w-9 h-9 rounded-full text-[#1F2124] hover:bg-black/5 flex items-center justify-center transition-colors active:scale-95"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
