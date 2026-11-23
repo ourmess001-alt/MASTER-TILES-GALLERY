@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-marble: #F7F6F2;         /* Primary alabaster canvas */
+  --bg-surface: #FFFFFF;        /* Crisp card/modal surface */
+  --bg-stone-soft: #EFECE6;     /* Muted pill / subtle container */
+  --ink-primary: #2B2C30;       /* Charcoal slate — headlines, active buttons */
+  --ink-secondary: #5A5B61;     /* Graphite — descriptions, metadata */
+  --ink-muted: #8E8F94;         /* Index counters, disabled text */
+  --accent-taupe: #B8A382;      /* Warm marble vein gold/taupe accent */
+  --accent-taupe-soft: #DDD2C0; /* Subtle active ring / hairline highlight */
+  --border-hairline: #E2DFD8;   /* Ultra-clean architectural dividers */
+  --cta-disabled: #D5D3CE;      /* Disabled button state before size selection */
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-marble);
+  color: var(--ink-primary);
+}
+
+body {
+  font-family: var(--font-plus-jakarta), sans-serif;
+  background-color: var(--bg-marble);
+  color: var(--ink-primary);
+  overflow-x: hidden;
+}
+
+/* Subtle Marble Vein Texture Background */
+.bg-marble-vein {
+  background-color: var(--bg-marble);
+  background-image:
+    radial-gradient(at 15% 15%, rgba(184, 163, 130, 0.08) 0px, transparent 45%),
+    radial-gradient(at 85% 85%, rgba(43, 44, 48, 0.04) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(222, 210, 192, 0.06) 0px, transparent 60%);
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #B8A382;
+  color: #FFFFFF;
+}
+
+/* ========================================================
+   Brand Typography Shading (Medium Grey, Silver Grey, Marble White)
+   ======================================================== */
+.heading-brand-gradient {
+  background: linear-gradient(180deg, #4A505C 0%, #2A2D35 55%, #15171B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 3px rgba(20, 24, 30, 0.10));
+}
+
+.heading-brand-accent {
+  background: linear-gradient(135deg, #7A8190 0%, #A2AAB8 35%, #555C6A 70%, #30353E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 3px rgba(20, 24, 30, 0.08));
+}
+
+.heading-brand-accent-light {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E6EC 30%, #A4ACB9 70%, #767D8B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.25));
+}
+
+.heading-brand-subtle {
+  background: linear-gradient(180deg, #717784 0%, #484E59 55%, #282C34 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.85));
+}
