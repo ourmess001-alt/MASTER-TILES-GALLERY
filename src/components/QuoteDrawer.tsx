@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Trash2, Plus, Minus, MessageSquare, Copy, Check, ShoppingBag } from 'lucide-react';
 import { useQuote } from '../context/QuoteContext';
@@ -71,32 +72,32 @@ export const QuoteDrawer: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setIsDrawerOpen(false)}
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm"
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
         />
 
-        {/* Slide-over Drawer */}
-        <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+        {/* Slide-over Drawer - Full width on mobile, max-w-md on desktop with NO left offset */}
+        <div className="fixed inset-y-0 right-0 max-w-full flex w-full justify-end z-50 pointer-events-none">
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 350, damping: 35 }}
-            className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between border-l border-marble-300"
+            className="w-full sm:max-w-md bg-white shadow-2xl flex flex-col justify-between border-l border-[#E2DFD8] pointer-events-auto h-full overflow-hidden"
           >
             {/* Header */}
-            <div className="p-5 border-b border-marble-300 flex items-center justify-between bg-marble-100">
+            <div className="px-4 sm:px-6 py-4 border-b border-[#EAE7E0] flex items-center justify-between bg-[#FAF9F5]">
               <div className="flex items-center gap-2">
-                <ShoppingBag className="w-5 h-5 text-slate-900" />
-                <h3 className="font-display font-bold uppercase tracking-wider text-sm text-slate-900">
+                <ShoppingBag className="w-5 h-5 text-[#9E783B]" />
+                <h3 className="font-serif font-bold uppercase tracking-wider text-sm sm:text-base text-[#1F2124]">
                   Quote Bag ({itemCount})
                 </h3>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 {items.length > 0 && (
                   <button
                     onClick={clearBag}
-                    className="text-[11px] text-slate-600 hover:text-red-600 transition-colors"
+                    className="text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors px-2 py-1 rounded hover:bg-red-50"
                   >
                     Clear All
                   </button>
@@ -104,7 +105,7 @@ export const QuoteDrawer: React.FC = () => {
                 <button
                   onClick={() => setIsDrawerOpen(false)}
                   aria-label="Close quote bag"
-                  className="w-8 h-8 rounded-full bg-white hover:bg-marble-200 border border-marble-300 flex items-center justify-center text-slate-800 transition-colors"
+                  className="w-8.5 h-8.5 rounded-full bg-white hover:bg-slate-100 border border-[#DDD9D0] flex items-center justify-center text-slate-700 transition-colors shadow-2xs active:scale-95"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -112,23 +113,23 @@ export const QuoteDrawer: React.FC = () => {
             </div>
 
             {/* Wholesale / Retail Toggle Strip */}
-            <div className="bg-marble-200/70 px-5 py-2.5 border-b border-marble-300 flex items-center justify-between">
-              <span className="text-[11px] font-semibold text-slate-700">
+            <div className="bg-[#F5F3ED] px-4 sm:px-6 py-2.5 border-b border-[#EAE7E0] flex items-center justify-between">
+              <span className="text-xs font-semibold text-slate-700">
                 Pricing Mode:
               </span>
-              <div className="flex items-center gap-1 bg-white p-0.5 rounded-full border border-marble-300 shadow-xs">
+              <div className="flex items-center gap-1 bg-white p-1 rounded-full border border-[#DCD7CE] shadow-2xs">
                 <button
                   onClick={toggleWholesaleMode}
-                  className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                    !isWholesaleMode ? 'bg-slate-900 text-white' : 'text-slate-600'
+                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                    !isWholesaleMode ? 'bg-[#1F2124] text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   Retail
                 </button>
                 <button
                   onClick={toggleWholesaleMode}
-                  className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${
-                    isWholesaleMode ? 'bg-taupe-dark text-white' : 'text-slate-600'
+                  className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                    isWholesaleMode ? 'bg-[#9E783B] text-white shadow-2xs' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   Wholesale
@@ -137,13 +138,13 @@ export const QuoteDrawer: React.FC = () => {
             </div>
 
             {/* Items List */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5">
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center p-6 space-y-3 text-slate-600">
-                  <div className="w-14 h-14 rounded-full bg-marble-100 border border-marble-300 flex items-center justify-center text-slate-400">
+                  <div className="w-14 h-14 rounded-full bg-[#FAF9F5] border border-[#E5E2DC] flex items-center justify-center text-[#9E783B]">
                     <ShoppingBag className="w-6 h-6" />
                   </div>
-                  <h4 className="font-display font-bold text-slate-800 text-sm">
+                  <h4 className="font-serif font-bold text-slate-900 text-sm sm:text-base">
                     Your Quote Bag is Empty
                   </h4>
                   <p className="text-xs text-slate-600 max-w-xs font-body">
@@ -151,7 +152,7 @@ export const QuoteDrawer: React.FC = () => {
                   </p>
                   <button
                     onClick={() => setIsDrawerOpen(false)}
-                    className="mt-2 px-4 py-2 rounded-lg bg-slate-900 text-white font-bold text-xs uppercase tracking-wider"
+                    className="mt-2 px-5 py-2.5 rounded-full bg-[#1F2124] hover:bg-[#9E783B] text-white font-serif font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
                   >
                     Browse Collection
                   </button>
@@ -163,64 +164,78 @@ export const QuoteDrawer: React.FC = () => {
                   return (
                     <div
                       key={item.id}
-                      className="bg-marble-100/70 rounded-xl p-3.5 border border-marble-300 flex gap-3 relative group"
+                      className="bg-[#FAF9F5] rounded-2xl p-3.5 sm:p-4 border border-[#EAE7E0] flex gap-3 sm:gap-3.5 relative group shadow-2xs"
                     >
                       {/* Mini Thumbnail */}
-                      <div className="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-white border border-marble-300">
-                        <TileSlabVisual
-                          tile={tileObj}
-                          finish={item.finish}
-                          className="w-full h-full pointer-events-none"
-                        />
+                      <div className="w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 bg-white border border-[#E5E2DC] shadow-xs relative">
+                        {tileObj.image ? (
+                          <Image
+                            src={tileObj.image}
+                            alt={tileObj.name}
+                            fill
+                            className="object-cover"
+                            sizes="80px"
+                          />
+                        ) : (
+                          <TileSlabVisual
+                            tile={tileObj}
+                            finish={item.finish}
+                            className="w-full h-full pointer-events-none"
+                          />
+                        )}
                       </div>
 
                       {/* Item Details */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-1">
-                          <h4 className="text-xs font-bold font-display uppercase text-slate-900 truncate">
-                            {item.tileName}
-                          </h4>
-                          <button
-                            onClick={() => removeItem(item.id)}
-                            aria-label="Remove item"
-                            className="text-slate-400 hover:text-red-500 transition-colors p-0.5"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                      <div className="flex-1 min-w-0 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-start justify-between gap-1.5">
+                            <h4 className="text-xs sm:text-[13px] font-bold font-serif text-[#1F2124] leading-snug line-clamp-2">
+                              {item.tileName}
+                            </h4>
+                            <button
+                              onClick={() => removeItem(item.id)}
+                              aria-label="Remove item"
+                              className="text-slate-400 hover:text-red-500 transition-colors p-1 rounded-md hover:bg-red-50 flex-shrink-0 -mr-1"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
 
-                        <div className="flex items-center gap-2 text-[10px] text-slate-600 mt-0.5 font-mono">
-                          <span className="bg-white px-1.5 py-0.2 rounded border border-marble-300 font-bold">
-                            {item.size}
-                          </span>
-                          <span className="capitalize">{item.finish}</span>
+                          <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-slate-600 mt-1 font-mono">
+                            <span className="bg-white px-1.5 py-0.5 rounded border border-[#E0DCD4] font-bold text-slate-800">
+                              {item.size}
+                            </span>
+                            <span className="capitalize font-medium text-slate-600">{item.finish}</span>
+                          </div>
                         </div>
 
                         {/* Quantity Stepper & Subtotal */}
-                        <div className="flex items-center justify-between mt-3">
-                          <div className="flex items-center border border-marble-300 bg-white rounded-lg overflow-hidden">
+                        <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#EAE7E0]/70">
+                          <div className="flex items-center border border-[#D5D0C7] bg-white rounded-lg overflow-hidden shadow-2xs">
                             <button
                               onClick={() => updateQuantity(item.id, item.boxes - 1)}
-                              className="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-marble-200"
+                              className="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors active:scale-95"
+                              aria-label="Decrease quantity"
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="w-8 text-center text-xs font-mono font-bold text-slate-900">
+                            <span className="w-8 text-center text-xs font-mono font-bold text-[#1F2124]">
                               {item.boxes}
                             </span>
                             <button
                               onClick={() => updateQuantity(item.id, item.boxes + 1)}
-                              className="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-marble-200"
+                              className="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors active:scale-95"
+                              aria-label="Increase quantity"
                             >
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
 
                           <div className="text-right">
-                            <div className="text-xs font-bold font-display text-slate-900">
+                            <div className="text-xs sm:text-sm font-bold font-serif text-[#1F2124]">
                               ৳{item.totalBDT.toLocaleString()}
                             </div>
-                            <div className="text-[9px] text-slate-600 font-mono">
+                            <div className="text-[10px] text-slate-500 font-bengali">
                               {item.sqft} স্কয়ার ফিট
                             </div>
                           </div>
@@ -234,45 +249,48 @@ export const QuoteDrawer: React.FC = () => {
 
             {/* Footer Calculation & Actions */}
             {items.length > 0 && (
-              <div className="p-5 border-t border-marble-300 bg-white space-y-4">
+              <div className="p-4 sm:p-5 border-t border-[#EAE7E0] bg-white space-y-3.5 shadow-lg">
                 {/* Summary Figures */}
-                <div className="space-y-1.5 text-xs">
-                  <div className="flex justify-between text-slate-600">
+                <div className="space-y-1.5 text-xs sm:text-sm bg-[#FAF9F5] p-3 rounded-xl border border-[#ECE8E0]">
+                  <div className="flex justify-between text-slate-600 font-medium">
                     <span>Total Coverage Area:</span>
-                    <span className="font-mono font-semibold text-slate-900">{totalSqft} sq.ft</span>
+                    <span className="font-mono font-bold text-[#1F2124]">{totalSqft} sq.ft</span>
                   </div>
-                  <div className="flex justify-between text-slate-600">
+                  <div className="flex justify-between text-slate-600 font-medium">
                     <span>Total Boxes:</span>
-                    <span className="font-mono font-semibold text-slate-900">{totalBoxes} Boxes</span>
+                    <span className="font-mono font-bold text-[#1F2124]">{totalBoxes} Boxes</span>
                   </div>
-                  <div className="flex justify-between text-slate-600 pt-1.5 border-t border-marble-200">
-                    <span className="font-bold text-slate-900">Estimated Total:</span>
-                    <span className="font-bold text-base font-display text-slate-900">
-                      ৳{totalBDT.toLocaleString()} BDT
-                    </span>
+                  <div className="flex justify-between items-center text-slate-700 pt-2 border-t border-[#E0DCD4]">
+                    <span className="font-bold text-[#1F2124] text-xs sm:text-sm">Estimated Total:</span>
+                    <div className="text-right">
+                      <span className="font-bold text-base sm:text-lg font-serif text-[#1F2124]">
+                        ৳{totalBDT.toLocaleString()}
+                      </span>
+                      <span className="text-[10px] font-mono font-semibold text-slate-500 ml-1">BDT</span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Primary WhatsApp Action */}
-                <div className="space-y-2">
+                <div className="space-y-2 pt-1">
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-98"
+                    className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-98"
                   >
-                    <WhatsAppIcon className="w-4.5 h-4.5 fill-current" />
+                    <WhatsAppIcon className="w-4.5 h-4.5 fill-current flex-shrink-0" />
                     <span>Send Quote via WhatsApp (হোয়াটসঅ্যাপে পাঠান)</span>
                   </a>
 
                   <button
                     onClick={handleCopyQuote}
-                    className="w-full py-2.5 px-3 rounded-xl bg-marble-100 hover:bg-marble-200 border border-marble-300 text-slate-800 text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                    className="w-full py-2.5 sm:py-3 px-3 rounded-xl bg-[#FAF9F5] hover:bg-[#F2EFE9] border border-[#D5D0C7] text-slate-800 text-xs sm:text-[13px] font-semibold flex items-center justify-center gap-2 transition-colors active:scale-98"
                   >
                     {copied ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>Quote Copied to Clipboard!</span>
+                        <span className="text-emerald-700 font-bold">Quote Copied to Clipboard!</span>
                       </>
                     ) : (
                       <>
